@@ -17,8 +17,16 @@ export default function CartContextProvider(props) {
       .catch((err) => err);
   }
 
+  async function clearCart() {
+    let { data } = await axios.delete(
+      `https://ecommerce.routemisr.com/api/v1/cart`,
+      { headers: { token: token } }
+    );
+    console.log("data deleted");
+  }
+
   return (
-    <CartContext.Provider value={{ AddToCart }}>
+    <CartContext.Provider value={{ AddToCart , clearCart}}>
       {props.children}
     </CartContext.Provider>
   );
